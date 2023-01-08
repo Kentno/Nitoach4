@@ -45,7 +45,7 @@ public class Guardian {
         int timeLimit = Runtime.getInt();
         System.out.println("Please enter the number of rides the E-Ticket will be valid for:");
         int rideLimit = Runtime.getInt();
-        ETicket ticket = new ETicket(rideLimit, LocalTime.now().plusHours(timeLimit));
+        ETicket ticket = new ETicket(rideLimit, LocalTime.now().plusHours(timeLimit), this.giveInfo());
         ticket.addChild(c);
         this.account.addETicket(ticket);
         c.setEticket(ticket);
@@ -53,7 +53,8 @@ public class Guardian {
 
         System.out.println("User succesfuly added");
     }
-    public void giveInfo(){
+    public CreditCard giveInfo(){
+        Runtime.scanner.nextLine();
         System.out.println("Please enter your credit card number: ");
         String ccID = Runtime.scanner.nextLine();
         if(!CreditCardCompany.isValid(ccID)){
@@ -65,7 +66,7 @@ public class Guardian {
         System.out.println("Please enter your credit card company name: ");
         String cccName = Runtime.scanner.nextLine();
         cc = new CreditCard(ccID, limit, cccName);
-        this.account.addCC(cc);
+        return cc;
     }
 
 

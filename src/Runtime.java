@@ -1,9 +1,13 @@
+import javax.swing.border.EtchedBorder;
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import java.time.LocalTime;
 
 public class Runtime {
-    public static List<Object> systemObjects;
+    public static List<Object> systemObjects = new ArrayList<>();
     public static Scanner scanner = new Scanner(System.in);
     public static Park park = new Park();
     public static Map map = new Map();
@@ -19,15 +23,10 @@ public class Runtime {
         systemObjects.add(park);
         systemObjects.add(map);
         systemObjects.add(app);
-        systemObjects.add(mamba);
-        systemObjects.add(giantWheel);
-        systemObjects.add(carrousel);
         systemObjects.add(currentUser);
         boolean userInit = false;
-        LocalTime lt = LocalTime.now();
-        lt = lt.plusHours(3);
-        System.out.println(lt);
-        while(true) {
+        while (true) {
+            System.out.println(systemObjects);
             System.out.println("Welcome to ePark!");
             System.out.println("""
                     1) Register child
@@ -59,18 +58,17 @@ public class Runtime {
             System.out.println("\n\n");
         }
     }
-    public static int getInt(){
+
+    public static int getInt() {
         int i = -1;
-        while(i < 0){
-            try{
+        while (i < 0) {
+            try {
                 i = scanner.nextInt();
-            }
-            catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Not a number, please try again: ");
                 scanner.nextLine();
             }
         }
         return i;
     }
-
 }

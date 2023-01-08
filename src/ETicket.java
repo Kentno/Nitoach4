@@ -8,11 +8,17 @@ public class ETicket {
     private LocalTime timeLimit;
     private Child child;
     private ArrayList<Device> allowedDevices;
+    private final CreditCard cc;
 
-    public ETicket(int rideLimit, LocalTime timeLimit) {
+    public CreditCard getCreditCard() {
+        return cc;
+    }
+
+    public ETicket(int rideLimit, LocalTime timeLimit, CreditCard creditCard) {
         id = counter++;
         this.ridesLeft = rideLimit;
         this.timeLimit = timeLimit;
+        this.cc = creditCard;
         Runtime.systemObjects.add(this);
     }
     public int getId() {

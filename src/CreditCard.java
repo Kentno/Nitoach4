@@ -21,6 +21,10 @@ public class CreditCard {
         return id;
     }
 
+    public CreditCardCompany getCcc() {
+        return ccc;
+    }
+
     public void setId(String id) {
         this.id = id;
     }

@@ -8,6 +8,8 @@ public class Account {
         private List<ETicket> eTickets;
         private Guardian user;
 
+
+
     public Account(Guardian user) {
         this.user = user;
         this.purchasesAndRefunds = new ArrayList<>();
@@ -15,6 +17,11 @@ public class Account {
         this.children = new ArrayList<>();
         this.eTickets = new ArrayList<>();
         Runtime.systemObjects.add(this);
+    }
+
+
+    public List<ETicket> geteTickets() {
+        return eTickets;
     }
 
     public void addCC(CreditCard cc){

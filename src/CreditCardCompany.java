@@ -10,8 +10,15 @@ public class CreditCardCompany {
         return true;
     }
 
+    public boolean chargeCreditCard(CreditCard cc, int sum){
+        return cc.getLimit() >= sum;
+    }
+
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if (obj instanceof String){
+            return obj.equals(this.name);
+        }
+        return false;
     }
 }
