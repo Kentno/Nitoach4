@@ -64,6 +64,7 @@ public class ETicket {
     public void removeRide(Device device){
         if(this.getAllowedDevices().contains(device)) {
             this.getAllowedDevices().remove(device);
+            System.out.println("Device removed successfully");
         }
         else System.out.println("We have encountered a problem,\nThe chosen device is not the the allowed devices list for this E-ticket.");
     }

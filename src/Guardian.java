@@ -29,6 +29,9 @@ public class Guardian {
 
     }
     public void FillRegisterForm(){
+        Runtime.scanner.nextLine();
+        System.out.println("please enter child's first name: ");
+        String name = Runtime.scanner.nextLine();
         System.out.println("please enter child's weight: ");
         int weight = Runtime.getInt();
         System.out.println("please enter child's height: ");
@@ -38,7 +41,8 @@ public class Guardian {
         System.out.println("please enter child's age: ");
         int age = Runtime.getInt();
 
-        Child c = new Child(weight,height,age);
+
+        Child c = new Child(weight,height,age, name);
         children.add(c);
         this.account.addChild(c);
         System.out.println("Please enter the number of hours the E-Ticket will be valid for:");
