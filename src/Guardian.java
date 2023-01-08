@@ -67,6 +67,7 @@ public class Guardian {
         }
         System.out.println("Please enter your credit card limit: ");
         int limit = Runtime.getInt();
+        Runtime.scanner.nextLine();
         System.out.println("Please enter your credit card company name: ");
         String cccName = Runtime.scanner.nextLine();
         cc = new CreditCard(ccID, limit, cccName);

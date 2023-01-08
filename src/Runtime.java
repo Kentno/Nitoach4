@@ -18,8 +18,7 @@ public class Runtime {
     private static final Guardian currentUser = new Guardian();
 
 
-
-    public static void main(String[] args){
+    public static void main(String[] args) {
         systemObjects.add(park);
         systemObjects.add(map);
         systemObjects.add(app);
@@ -30,14 +29,14 @@ public class Runtime {
             System.out.println("Welcome to ePark!");
             System.out.println("""
                     1) Register child
-                    2) Manage ticket  
+                    2) Manage ticket
                     3) Add ride
                     4) Remove ride
                     5) Exit park
                     6) Exit
                     """);
             int pick = scanner.nextInt();
-            switch (pick){
+            switch (pick) {
                 default:
                     System.out.println("Illegal character.");
                     break;
@@ -45,6 +44,8 @@ public class Runtime {
                     currentUser.FillRegisterForm();
                     break;
                 case 2:
+                    // Change CC number? Maybe. Limit makes more sense.
+                    //
                     break;
                 case 3:
                     scanner.nextLine();
@@ -174,6 +175,7 @@ public class Runtime {
 
                     break;
                 case 6:
+                    System.out.println("Thank you for coming to our park :D");
                     return;
             }
             System.out.println("\n\n");
