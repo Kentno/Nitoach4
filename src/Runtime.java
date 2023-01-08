@@ -101,6 +101,7 @@ public class Runtime {
                     } else
                         System.out.println("This ride doesn't exist in our park.");
                     break;
+
                 case 4:
                     scanner.nextLine();
                     System.out.println("Which child would you like to add the ride to? Please type it's exact name");

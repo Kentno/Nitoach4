@@ -55,7 +55,7 @@ public class Guardian {
         c.setEticket(ticket);
 
 
-        System.out.println("User succesfuly added");
+        System.out.println("User successfully added");
     }
     public CreditCard giveInfo(){
         Runtime.scanner.nextLine();
@@ -74,5 +74,10 @@ public class Guardian {
         return cc;
     }
 
-
+    public void removeRide(Device d, ETicket et) {
+        if (!account.geteTickets().contains(et))
+            System.out.println("Given E-ticket does not belong to your account.");
+        else
+            et.removeRide(d);
+    }
 }
