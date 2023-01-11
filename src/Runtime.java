@@ -44,8 +44,99 @@ public class Runtime {
                     currentUser.FillRegisterForm();
                     break;
                 case 2:
-                    // Change CC number? Maybe. Limit makes more sense.
-                    //
+                    scanner.nextLine();
+                    System.out.println("Please choose whether to add or remove a device to a ticket: (a,r)");
+                    String answer = Runtime.scanner.nextLine();
+                    if(Objects.equals(answer,"a")){
+                        System.out.println("Which child would you like to add the ride to? Please type his/her exact name:");
+                        String childName = Runtime.scanner.nextLine();
+                        List<Child> clist = currentUser.getChildren();
+                        Child child = null;
+                        for (Child c : clist)
+                            if (Objects.equals(c.getName(), childName)) {
+                                child = c;
+                                break;
+                            }
+                        if (child == null) {
+                            System.out.println("There is no child registered with that name.");
+                            continue;
+                        }
+
+                        if (child.getEticket().getAllowedDevices().size() >= child.getEticket().getCreditCard().getLimit()) {
+                            System.out.println("There is not enough money in your credit card to add another ride.");
+                            break;
+                        }
+                        System.out.println("Which ride would you like to add? Please type its exact name:");
+                        String deviceName = Runtime.scanner.nextLine();
+
+                        if (Objects.equals(deviceName, "Carrousel")) {
+                            if (carrousel.canRide(child) && carrousel.isOpen())
+                                child.getEticket().addRide(carrousel);
+                            else {
+                                System.out.println("The child isn't allowed to ride or the ride is unavailable at the moment.");
+                            }
+                        } else if (Objects.equals(deviceName, "Mamba Ride")) {
+                            String extremeAnswer = null;
+                            System.out.println("This is an extreme ride, are you sure you want to allow your child to enter this ride? (y,n)?");
+                            while (true) {
+                                extremeAnswer = Runtime.scanner.nextLine();
+                                if (Objects.equals(extremeAnswer, "n") || (Objects.equals(extremeAnswer, "y")))
+                                    break;
+                                System.out.println("invalid character. Enter again:");
+                            }
+                            if (Objects.equals(extremeAnswer, "n"))
+                                break;
+                            if (mamba.canRide(child) && mamba.isOpen())
+                                child.getEticket().addRide(mamba);
+                            else {
+                                System.out.println("Either the child isn't allowed to ride, or the ride is unavailable at the moment.");
+                            }
+                        } else if (Objects.equals(deviceName, "Giant Wheel")) {
+                            if (giantWheel.canRide(child) && giantWheel.isOpen()) {
+                                child.getEticket().addRide(giantWheel);
+                            } else {
+                                System.out.println("Either the child isn't allowed to ride, or the ride is unavailable at the moment.");
+                            }
+                        } else
+                            System.out.println("This ride doesn't exist in our park.");
+                    }
+                    else if(Objects.equals(answer,"r")){
+                        scanner.nextLine();
+                        System.out.println("Which child would you like to remove the ride from? Please type it's exact name");
+                        String childName1 = Runtime.scanner.nextLine();
+                        List<Child> childList1 = currentUser.getChildren();
+                        Child child1 = null;
+                        for (Child c : childList1)
+                            if (Objects.equals(c.getName(), childName1)) {
+                                child1 = c;
+                                break;
+                            }
+                        if (child1 == null) {
+                            System.out.println("There is no child registered with that name.");
+                        } else {
+                            System.out.println("Which ride would you like to remove? Please type it's exact name");
+                            String deviceName1 = Runtime.scanner.nextLine();
+
+                            if (Objects.equals(deviceName1, "Carrousel")) {
+                                currentUser.removeRide(carrousel, child1.getEticket());
+                            } else if (Objects.equals(deviceName1, "Mamba Ride")) {
+                                if (mamba.canRide(child1) && mamba.isOpen()) {
+                                    child1.getEticket().addRide(mamba);
+                                } else {
+                                    System.out.println("Either the child isn't allowed to ride, or the ride is unavailable at the moment.");
+                                }
+                            } else if (Objects.equals(deviceName1, "Giant Wheel")) {
+                                if (giantWheel.canRide(child1) && giantWheel.isOpen()) {
+                                    child1.getEticket().addRide(giantWheel);
+                                } else {
+                                    System.out.println("Either the child isn't allowed to ride, or the ride is unavailable at the moment.");
+                                }
+                            }
+                        }
+
+                    } else {
+                        System.out.println("A proper choice was not chosen, please choose a for Adding\nOr r for Removing a ride. Returning to the main menu.");
+                    }
                     break;
                 case 3:
                     scanner.nextLine();
@@ -104,7 +195,7 @@ public class Runtime {
 
                 case 4:
                     scanner.nextLine();
-                    System.out.println("Which child would you like to add the ride to? Please type it's exact name");
+                    System.out.println("Which child would you like to remove the ride from? Please type it's exact name");
                     String childName1 = Runtime.scanner.nextLine();
                     List<Child> childList1 = currentUser.getChildren();
                     Child child1 = null;
